@@ -2,40 +2,70 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <!-- 手机自适应核心 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的个人网站</title>
-  <!-- 引入样式文件 -->
+  <title>金桥社区服务</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- 导航栏（所有页面通用） -->
-<nav>
-  <ul>
-    <li><a href="index.html">首页</a></li>
-    <li><a href="about.html">关于我</a></li>
-    <li><a href="works.html">作品集</a></li>
-    <li><a href="contact.html">联系方式</a></li>
-  </ul>
-</nav>
+<!-- 1. 顶部栏 -->
+<div class="header">金桥社区服务</div>
 
-<!-- 首页主体内容 -->
-<div class="container">
-  <h1>你好，我是XXX</h1>
-  <p>欢迎来到我的个人网站，这里记录我的生活、学习和作品~</p>
-  <!-- 替换为你的头像路径 -->
-  <img src="images/avatar.jpg" alt="我的头像" width="200" style="border-radius: 50%; margin: 1rem 0;">
-  <br>
-  <a href="about.html" class="btn">了解更多</a>
+<!-- 2. Banner区域（3张固定图） -->
+<div class="banner">
+  <div class="banner-list">
+    <img src="images/banner/banner1.jpg" alt="banner1">
+    <img src="images/banner/banner2.jpg" alt="banner2">
+    <img src="images/banner/banner3.jpg" alt="banner3">
+  </div>
 </div>
 
-<!-- 页脚（所有页面通用） -->
-<footer>
-  <p>&copy; 2026 我的个人网站 | 用心制作</p>
-</footer>
+<!-- 3. 菜单区域（4个按钮+图标） -->
+<div class="menu">
+  <div class="menu-grid">
+    <a href="life.html" class="menu-item">
+      <img src="images/icons/life.png" alt="图标">
+      <span>生活服务</span>
+    </a>
+    <a href="notice.html" class="menu-item">
+      <img src="images/icons/notice.png" alt="图标">
+      <span>社区通知</span>
+    </a>
+    <a href="child.html" class="menu-item">
+      <img src="images/icons/child.png" alt="图标">
+      <span>托儿便民</span>
+    </a>
+    <a href="second.html" class="menu-item">
+      <img src="images/icons/second.png" alt="图标">
+      <span>闲置置换</span>
+    </a>
+  </div>
+</div>
 
-<!-- 引入交互文件 -->
+<!-- 4. 政务建设 -->
+<div class="module">
+  <div class="module-title">政务建设</div>
+  <a href="government.html">
+    <img src="images/government/gov.jpg" alt="政务建设" class="gov-img">
+  </a>
+</div>
+
+<!-- 5. 服务推荐 -->
+<div class="module">
+  <div class="module-title">服务推荐</div>
+  <div class="service-grid">
+    <a href="service1.html" class="service-item">
+      <img src="images/service/service1.jpg" alt="服务1">
+    </a>
+    <a href="service2.html" class="service-item">
+      <img src="images/service/service2.jpg" alt="服务2">
+    </a>
+    <a href="service3.html" class="service-item">
+      <img src="images/service/service3.jpg" alt="服务3">
+    </a>
+  </div>
+</div>
+
 <script src="js/script.js"></script>
 </body>
 </html>
