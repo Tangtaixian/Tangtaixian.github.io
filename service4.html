@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>“天天团购”活动专辑</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 70px; /* 防止内容被底部栏遮挡 */
+        }
+
+        /* 顶部导航栏 - 保留原结构 */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eee;
+        }
+        .back-btn {
+            font-size: 18px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            color: #0056b3;
+        }
+        .nav-btn {
+            font-size: 1.2rem;
+            color: #333;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* 搜索功能区 - 模仿截图绿色顶部 */
+        .search-area {
+            background-color: #e6f9e6;
+            padding: 12px 16px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .location-tag {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #333;
+            font-size: 0.95rem;
+        }
+        .search-input {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 20px;
+            padding: 8px 16px;
+        }
+        .search-input input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 1rem;
+        }
+        .search-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        /* 探店标签 */
+        .tab-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        .tab-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            width: 45%;
+        }
+        .tab-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .tab-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+        .tab-text p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* 分类标签栏 */
+        .category-bar {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 16px;
+            background-color: white;
+            gap: 16px;
+            margin-bottom: 10px;
+        }
+        .category-item {
+            white-space: nowrap;
+            font-size: 1rem;
+            color: #666;
+            padding: 4px 0;
+        }
+        .category-item.active {
+            color: #333;
+            font-weight: 600;
+        }
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            padding: 0 16px 10px;
+            background-color: white;
+            overflow-x: auto;
+        }
+        .filter-tag {
+            white-space: nowrap;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        .filter-tag.active {
+            background-color: #ff4444;
+            color: white;
+        }
+
+        /* 免单提示条 */
+        .free-tip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 10px 16px;
+            margin-bottom: 10px;
+        }
+        .free-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .free-icon {
+            background-color: #ff4444;
+            color: white;
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        .countdown {
+            color: #ff4444;
+            font-weight: 600;
+        }
+
+        /* 商品列表 - 模仿截图布局 */
+        .product-list {
+            padding: 0 16px;
+        }
+        .product-item {
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .product-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 8px;
+            background-color: #e0e0e0;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        .product-info {
+            flex: 1;
+            padding-left: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .product-tags {
+            display: flex;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        .product-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .price-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .condition {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .price-btn {
+            background: linear-gradient(90deg, #ff4444 60%, #ffdd00 40%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .price-tag {
+            background-color: white;
+            color: #ff4444;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 4px;
+        }
+
+        /* 底部导航栏 */
+        .footer-bar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            background-color: white;
+            border-top: 1px solid #eee;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .footer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .footer-item.active {
+            color: #4caf50;
+        }
+        .footer-icon {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 - 保留原结构 -->
+    <div class="top-nav">
+        <div class="back-btn" onclick="javascript:history.back(-1);">返回</div>
+        <div class="nav-title">“天天团购”活动专辑</div>
+        <button class="nav-btn">⋯</button>
+    </div>
+
+    <!-- 搜索功能区 - 模仿截图顶部 -->
+    <div class="search-area">
+        <div class="search-bar">
+            <div class="location-tag">📍 浦东…</div>
+            <div class="search-input">
+                <input type="text" placeholder="找好店">
+                <button class="search-btn">搜索</button>
+            </div>
+        </div>
+        <div class="tab-container">
+            <div class="tab-item">
+                <div class="tab-icon" style="background-color: #4caf50; color: white;">省钱</div>
+                <div class="tab-text">
+                    <h4>省钱探店</h4>
+                    <p>笔记抵扣省钱</p>
+                </div>
+            </div>
+            <div class="tab-item">
+                <div class="tab-icon" style="background-color: #ff9800; color: white;">赚钱</div>
+                <div class="tab-text">
+                    <h4>赚钱探店</h4>
+                    <p>高价接通告赚钱</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分类标签栏 -->
+    <div class="category-bar">
+        <div class="category-item active">推荐</div>
+        <div class="category-item">看笔记</div>
+        <div class="category-item">小吃快餐</div>
+        <div class="category-item">饮品类</div>
+        <div class="category-item">甜品蛋糕</div>
+        <div class="category-item">地方菜</div>
+    </div>
+    <div class="filter-tags">
+        <div class="filter-tag">筛选</div>
+        <div class="filter-tag">出游甄选</div>
+        <div class="filter-tag active">新人免单</div>
+        <div class="filter-tag">近期上新</div>
+        <div class="filter-tag">只看可抢</div>
+    </div>
+
+    <!-- 免单提示条 -->
+    <div class="free-tip">
+        <div class="free-left">
+            <span class="free-icon">免单</span>
+            <span>您有1张免单卡 待使用</span>
+        </div>
+        <div class="countdown">06天 23:59:42 后到期 ></div>
+    </div>
+
+    <!-- 商品列表 - 模仿截图内容 -->
+    <div class="product-list">
+        <!-- 商品1 -->
+        <div class="product-item">
+            <div class="product-img">☕ 咖啡</div>
+            <div class="product-info">
+                <div>
+                    <div class="product-title">Juaner Coffee卷二煎饼咖啡 特惠咖啡单人餐</div>
+                    <div class="product-tags">
+                        <span>✅ 随时退·过期自动退</span>
+                        <span>热度97</span>
+                    </div>
+                    <div class="product-detail">
+                        <span>本套餐美团在售¥19.8</span>
+                        <span>距离425.4m</span>
+                    </div>
+                    <div class="condition">大众点评等级≥Lv1 | 部分日期不可约</div>
+                </div>
+                <div class="price-area">
+                    <button class="price-btn">
+                        <span>¥0</span>
+                        <span class="price-tag">¥19.8</span>
+                        <span>⚡ 立抢</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 商品2 -->
+        <div class="product-item">
+            <div class="product-img">🥛 米乳</div>
+            <div class="product-info">
+                <div>
+                    <div class="product-title">谷人说·中国谷饮 五谷丰登套餐</div>
+                    <div class="product-tags">
+                        <span>✅ 随时退·过期自动退</span>
+                        <span>热度98</span>
+                    </div>
+                    <div class="product-detail">
+                        <span>本套餐美团在售¥35.9</span>
+                        <span>距离1.21km</span>
+                    </div>
+                    <div class="condition">需打卡收藏 | 部分日期不可约</div>
+                </div>
+                <div class="price-area">
+                    <button class="price-btn">
+                        <span>¥0</span>
+                        <span class="price-tag">¥35.9</span>
+                        <span>⚡ 立抢</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 商品3 -->
+        <div class="product-item">
+            <div class="product-img">🍜 大排面</div>
+            <div class="product-info">
+                <div>
+                    <div class="product-title">泽福记卤味铺·面馆 单人餐(大排面+荷包蛋)</div>
+                    <div class="product-tags">
+                        <span>✅ 随时退·过期自动退</span>
+                        <span>164人觉得超值</span>
+                    </div>
+                    <div class="product-detail">
+                        <span>本套餐美团在售¥18</span>
+                        <span>距离1.67km</span>
+                    </div>
+                    <div class="condition">大众点评等级≥Lv1 | 全周可约</div>
+                </div>
+                <div class="price-area">
+                    <button class="price-btn">
+                        <span>¥0</span>
+                        <span class="price-tag">¥18</span>
+                        <span>⚡ 立抢</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 商品4 -->
+        <div class="product-item">
+            <div class="product-img">🍲 川菜</div>
+            <div class="product-info">
+                <div>
+                    <div class="product-title">福德味·本帮菜·川湘菜 江浙菜双人餐</div>
+                    <div class="product-tags">
+                        <span>✅ 随时退·过期自动退</span>
+                        <span>鲈鱼鲜嫩 元宝虾味鲜</span>
+                    </div>
+                    <div class="product-detail">
+                        <span>本套餐美团在售¥166</span>
+                        <span>距离2.71km</span>
+                    </div>
+                    <div class="condition">大众点评等级≥Lv5 | 部分日期不可约</div>
+                </div>
+                <div class="price-area">
+                    <button class="price-btn">
+                        <span>¥0</span>
+                        <span class="price-tag">¥166</span>
+                        <span>⚡ 立抢</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

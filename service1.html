@@ -5,12 +5,269 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>生活服务</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 适配原有页面的报名表样式 */
+    .module-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      padding: 15px 0;
+      background-color: #c8e6c9; /* 呼应图片的草地色 */
+      margin-bottom: 0;
+    }
+    .form-container {
+      background-color: white;
+      padding: 20px;
+    }
+    .welcome-text {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    .form-item {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 17px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .form-label .required {
+      color: #f44336; /* 必填星号红色 */
+      margin-right: 4px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #81c784; /* 绿色焦点高亮 */
+    }
+    /* 单选按钮组样式 */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .radio-option input {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+    }
+    /* 下拉框样式 */
+    .form-select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      background-color: white;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+    }
+    /* 地址组（下拉+文本框） */
+    .address-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    /* 家长信息组 */
+    .parent-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    /* 提交按钮 */
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #43a047;
+    }
+    /* 顶部卡通Banner */
+    .form-banner {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(to bottom, #bbdefb, #c8e6c9);
+      position: relative;
+      overflow: hidden;
+    }
+    .form-banner-illustration {
+      width: 100%;
+      height: 100%;
+      /* 示例插画，可替换为你自己的图片 */
+      background-image: url('https://img.icons8.com/color/96/000000/kid-on-bike.png');
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 150px;
+    }
+
+    /* ========== 新增：顶部标题栏返回功能样式 ========== */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 20px;
+      background-color: #f5f5f5;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      position: relative;
+      border-bottom: 1px solid #eee;
+    }
+    /* 返回按钮样式 */
+    .back-btn {
+      position: absolute;
+      left: 20px;
+      font-size: 18px;
+      color: #4caf50;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .back-btn:hover {
+      color: #43a047;
+    }
+  </style>
 </head>
 <body>
-<div class="header">金桥社区服务</div>
-<div class="module" style="min-height: 500px;">
-  <div class="module-title">服务推荐1</div>
-  <p style="padding: 20px;">这里填写页面内容（可自行编辑）</p>
+<!-- ========== 修改：顶部标题增加返回按钮 ========== -->
+<div class="header">
+  <div class="back-btn" onclick="javascript:history.back(-1);">返回</div>
+  金桥社区服务
+</div>
+
+<div class="module" style="min-height: auto;">
+  <!-- 顶部卡通Banner -->
+  <div class="form-banner">
+    <div class="form-banner-illustration"></div>
+  </div>
+  <!-- 模块标题 -->
+  <div class="module-title">幼儿托班报名登记表</div>
+  <!-- 表单主体 -->
+  <div class="form-container">
+    <!-- 欢迎语 -->
+    <p class="welcome-text">这个春天期待和你相遇，欢迎各位小可爱加入我们这个温馨的大家庭。</p>
+
+    <!-- 1. 宝宝姓名 -->
+    <div class="form-item">
+      <label class="form-label"><span class="required">*</span> 1. 宝宝姓名</label>
+      <input type="text" class="form-input" placeholder="请输入姓名">
+    </div>
+
+    <!-- 2. 宝宝性别 -->
+    <div class="form-item">
+      <label class="form-label"><span class="required">*</span> 2. 宝宝性别</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="gender" id="male" value="男">
+          <label for="male">男</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="gender" id="female" value="女">
+          <label for="female">女</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 宝宝出生日期 -->
+    <div class="form-item">
+      <label class="form-label"><span class="required">*</span> 3. 宝宝出生日期</label>
+      <input type="date" class="form-input" placeholder="请选择日期">
+    </div>
+
+    <!-- 4. 预报名班级 -->
+    <div class="form-item">
+      <label class="form-label"><span class="required">*</span> 4. 预报名班级</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="class" id="class1" value="小班">
+          <label for="class1">小班(满3周岁)</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="class" id="class2" value="中班">
+          <label for="class2">中班(满4周岁)</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="class" id="class3" value="大班">
+          <label for="class3">大班(满5周岁)</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="class" id="class4" value="大大班">
+          <label for="class4">大大班(满6周岁)</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 户籍所在地 -->
+    <div class="form-item">
+      <label class="form-label"><span class="required">*</span> 5. 户籍所在地</label>
+      <div class="address-group">
+        <select class="form-select">
+          <option value="">请选择 省/市/区/县</option>
+        </select>
+        <input type="text" class="form-input" placeholder="请输入详细地址">
+      </div>
+    </div>
+
+    <!-- 6. 现住址 -->
+    <div class="form-item">
+      <label class="form-label"><span class="required">*</span> 6. 现住址</label>
+      <div class="address-group">
+        <select class="form-select">
+          <option value="">请选择 省/市/区/县</option>
+        </select>
+        <input type="text" class="form-input" placeholder="请输入详细地址">
+    </div>
+    </div>
+
+    <!-- 7. 父亲信息 -->
+    <div class="form-item">
+      <label class="form-label"><span class="required">*</span> 7. 家长信息（父亲）</label>
+      <div class="parent-group">
+        <input type="text" class="form-input" placeholder="父亲姓名">
+        <input type="tel" class="form-input" placeholder="父亲手机号">
+      </div>
+    </div>
+
+    <!-- 8. 母亲信息 -->
+    <div class="form-item">
+      <label class="form-label"><span class="required">*</span> 8. 家长信息（母亲）</label>
+      <div class="parent-group">
+        <input type="text" class="form-input" placeholder="母亲姓名">
+        <input type="tel" class="form-input" placeholder="母亲手机号">
+      </div>
+    </div>
+
+    <!-- 提交按钮 -->
+    <button class="submit-btn">提交</button>
+  </div>
 </div>
 </body>
 </html>
