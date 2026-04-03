@@ -1,117 +1,411 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的 - 测试饭店1</title>
-  <link rel="stylesheet" href="css/common.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幸福金桥 - 我的</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 70px; /* 底部导航栏占位 */
+            color: #333;
+        }
+
+        /* ------------------- 商家头部 (与其他页面统一) ------------------- */
+        .merchant-header {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        .merchant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background-image: url("https://via.placeholder.com/50"); /* 替换为真实头像 */
+            background-size: cover;
+            background-color: #ddd;
+        }
+        .merchant-info h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .merchant-info p {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* ------------------- 登录/注册横幅 (橙色渐变) ------------------- */
+        .login-banner {
+            background: linear-gradient(to right, #ff9a00, #ff6700);
+            color: #fff;
+            padding: 20px 15px;
+            margin: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #ff6700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .banner-text {
+            flex: 1;
+        }
+        .banner-text p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-login {
+            background-color: #fff;
+            color: #ff6700;
+            font-weight: bold;
+        }
+        .btn-register {
+            background-color: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+
+        /* ------------------- 会员权益模块 ------------------- */
+        .member-benefits {
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #333;
+        }
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+        }
+        /* 不同颜色的图标背景 */
+        .icon-discount { background-color: #ff9a00; }
+        .icon-point { background-color: #00c48c; }
+        .icon-priority { background-color: #66c6ff; }
+        .icon-special { background-color: #9d65c9; }
+
+        /* ------------------- 功能列表模块 ------------------- */
+        .menu-list {
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .menu-item {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 16px;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .menu-item .left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .menu-item .icon {
+            width: 20px;
+            height: 20px;
+            color: #999;
+        }
+        .menu-item .text {
+            color: #333;
+        }
+        .menu-item .hint {
+            color: #999;
+            margin-left: auto;
+            font-size: 14px;
+        }
+        .menu-item .arrow {
+            color: #ccc;
+            margin-left: 5px;
+        }
+
+        /* ------------------- 跳转小程序Banner ------------------- */
+        .banner-ad {
+            margin: 15px 10px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .banner-ad img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ------------------- 底部版权信息 ------------------- */
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin: 20px 0;
+        }
+
+        /* ------------------- 底部 Tab 栏 (与首页保持一致) ------------------- */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #eee;
+            z-index: 999;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: #999;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .tab-item.active {
+            color: #ff6700; /* 高亮橙色 */
+        }
+        .tab-item span:first-child {
+            font-size: 22px;
+        }
+    </style>
 </head>
 <body>
-  <!-- 公共头部 -->
-  <div class="header">
-    <div class="header-left">
-      <img src="images/shop-avatar.png" alt="店铺头像" class="shop-avatar">
-      <div class="shop-info">
-        <div class="shop-name">测试饭店1</div>
-        <div class="shop-greet">欢迎光临</div>
-      </div>
+    <!-- 商家头部 -->
+    <div class="merchant-header">
+        <div class="merchant-avatar"></div>
+        <div class="merchant-info">
+            <h1>幸福金桥</h1>
+            <p>金桥社区便民服务站</p>
+        </div>
     </div>
-    <div class="header-right">
-      <span>🔍</span>
-      <span>⭐</span>
-    </div>
-  </div>
 
-  <!-- 登录模块 -->
-  <div class="mine-header">
-    <div class="mine-avatar">👤</div>
-    <div>
-      <h3 style="font-size:20px; margin-bottom:16px;">登录后享受更多服务</h3>
-      <div class="mine-login">
-        <a href="#" class="btn-login">→ 登录</a>
-        <a href="#" class="btn-register">➕ 注册</a>
-      </div>
+    <!-- 登录/注册横幅 -->
+    <div class="login-banner">
+        <div class="user-avatar">👤</div>
+        <div class="banner-text">
+            <p>登录后享受更多服务</p>
+            <div class="button-group">
+                <button class="btn btn-login">→ 登录</button>
+                <button class="btn btn-register">+ 注册</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- 会员权益 -->
-  <div class="member-benefit">
-    <div class="benefit-item">
-      <div class="benefit-icon">%</div>
-      <span>专属折扣</span>
+    <!-- 会员权益模块 -->
+    <div class="member-benefits">
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon icon-discount">%</div>
+                <span>专属折扣</span>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon icon-point">🎁</div>
+                <span>积分好礼</span>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon icon-priority">⭐</div>
+                <span>优先服务</span>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon icon-special">👑</div>
+                <span>尊享特权</span>
+            </div>
+        </div>
     </div>
-    <div class="benefit-item">
-      <div class="benefit-icon">🎁</div>
-      <span>积分好礼</span>
-    </div>
-    <div class="benefit-item">
-      <div class="benefit-icon">⭐</div>
-      <span>优先服务</span>
-    </div>
-    <div class="benefit-item">
-      <div class="benefit-icon">👑</div>
-      <span>尊享特权</span>
-    </div>
-  </div>
 
-  <!-- 个人信息列表 -->
-  <div class="list-card">
-    <div class="list-item">
-      <div class="list-left">
-        <span class="list-icon" style="color:#4096ff;">👤</span>
-        <span class="list-text">个人信息</span>
-      </div>
-      <div style="color:#999;">请先登录 →</div>
+    <!-- 个人信息列表 -->
+    <div class="menu-list">
+        <div class="menu-item">
+            <div class="left">
+                <span class="icon">👤</span>
+                <span class="text">个人信息</span>
+            </div>
+            <div>
+                <span class="hint">请先登录</span>
+                <span class="arrow">></span>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="left">
+                <span class="icon">⭐</span>
+                <span class="text">收藏的商家</span>
+            </div>
+            <div>
+                <span class="hint">请先登录</span>
+                <span class="arrow">></span>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="left">
+                <span class="icon">❤️</span>
+                <span class="text">收藏的笔记</span>
+            </div>
+            <div>
+                <span class="hint">请先登录</span>
+                <span class="arrow">></span>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="left">
+                <span class="icon">❓</span>
+                <span class="text">帮助中心</span>
+            </div>
+            <div>
+                <span class="arrow">></span>
+            </div>
+        </div>
     </div>
-    <div class="list-item">
-      <div class="list-left">
-        <span class="list-icon" style="color:#ff6600;">⭐</span>
-        <span class="list-text">收藏的商家</span>
-      </div>
-      <div style="color:#999;">请先登录 →</div>
-    </div>
-    <div class="list-item">
-      <div class="list-left">
-        <span class="list-icon" style="color:#ff4d79;">❤️</span>
-        <span class="list-text">收藏的笔记</span>
-      </div>
-      <div style="color:#999;">请先登录 →</div>
-    </div>
-    <div class="list-item">
-      <div class="list-left">
-        <span class="list-icon" style="color:#ffaa00;">❓</span>
-        <span class="list-text">帮助中心</span>
-      </div>
-      <span class="list-arrow">→</span>
-    </div>
-  </div>
 
-  <!-- 广告Banner -->
-  <div class="ad-banner">
-    <div style="background:#ff0000; color:white; font-size:60px; text-align:center; padding:40px 0;">
-      跳转小程序
-    </div>
-  </div>
+    <!-- 跳转小程序Banner -->
+    <!-- <div class="banner-ad">
+        <!-- 替换为真实的跳转图片 -->
+        <img src="https://via.placeholder.com/375x100/FF0000/FFFFFF?text=跳转小程序" alt="跳转小程序">
+    </div> -->
 
-  <!-- 底部列表 -->
-  <div class="list-card">
-    <div class="list-item">
-      <div class="list-left">
-        <span class="list-icon" style="color:#ff4d79;">📞</span>
-        <span class="list-text">联系我们</span>
-      </div>
-      <span class="list-arrow">→</span>
+    <!-- 联系我们 -->
+    <div class="menu-list">
+        <div class="menu-item">
+            <div class="left">
+                <span class="icon">📞</span>
+                <span class="text">联系我们</span>
+            </div>
+            <div>
+                <span class="arrow">></span>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="left">
+                <span class="icon">📄</span>
+                <span class="text">服务协议</span>
+            </div>
+            <div>
+                <span class="arrow">></span>
+            </div>
+        </div>
+        <div class="menu-item">
+            <div class="left">
+                <span class="icon">🛡️</span>
+                <span class="text">隐私政策</span>
+            </div>
+            <div>
+                <span class="arrow">></span>
+            </div>
+        </div>
     </div>
-    <div class="list-item">
-      <div class="list-left">
-        <span class="list-icon" style="color:#4096ff;">📄</span>
-        <span class="list-text">服务协议</span>
-      </div>
-      <span class="list-arrow">→</span>
+
+    <!-- 底部版权 -->
+    <div class="footer-text">
+        Powered by 享碰AI
     </div>
-    <div class="list-item">
-      <div class="list-left">
-        <span class="list-icon" style="color:#36b37e;">🛡️</span>
-        <span class="list-text">隐私政策</span>
-      </div>
-      <span class="list-arrow">→</span>
+
+    <!-- 底部 Tab 栏 -->
+    <div class="tab-bar">
+        <a href="index.html" class="tab-item">
+            <span>🏠</span>
+            <span>首页</span>
+        </a>
+        <a href="ai.html" class="tab-item">
+            <span>✨</span>
+            <span>享碰AI</span>
+        </a>
+        <a href="coupon.html" class="tab-item">
+            <span>🎫</span>
+            <span>优惠券</span>
+        </a>
+        <a href="mine.html" class="tab-item active">
+            <span>👤</span>
+            <span>我的</span>
+        </a>
+    </div>
+    
+    <style>
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0;
+            z-index: 999;
+            height: 70px;
+            box-sizing: border-box;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #999;
+            font-size: 12px;
+            flex: 1;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #ff6600;
+        }
+        .nav-icon {
+            font-size: 20px;
+        }
+    </style>
+</body>
+</html>

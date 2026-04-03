@@ -1,77 +1,260 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>优惠券 - 测试饭店1</title>
-  <link rel="stylesheet" href="css/common.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幸福金桥 - 优惠券</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 70px; /* 底部导航栏占位 */
+            color: #333;
+        }
+
+        /* ------------------- 商家头部 (与首页统一) ------------------- */
+        .merchant-header {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        .merchant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background-image: url("https://via.placeholder.com/50"); /* 替换为真实头像 */
+            background-size: cover;
+            background-color: #ddd;
+        }
+        .merchant-info h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .merchant-info p {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* ------------------- 优惠券列表核心样式 ------------------- */
+        .coupon-container {
+            padding: 20px 15px;
+        }
+        .coupon-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* 优惠券卡片样式 */
+        .coupon-card {
+            background: linear-gradient(135deg, #ff6700 0%, #ff8a33 100%);
+            color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* 优惠券右侧的虚线分割 */
+        .coupon-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 120px;
+            width: 2px;
+            height: 100%;
+            background-image: linear-gradient(to bottom, #fff 50%, transparent 50%);
+            background-size: 100% 10px;
+        }
+
+        .coupon-left {
+            flex: 1;
+        }
+        .coupon-value {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .coupon-desc {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .coupon-time {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .coupon-right {
+            width: 80px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* 已使用/已过期样式 */
+        .coupon-card.used, .coupon-card.expired {
+            background: linear-gradient(135deg, #ccc 0%, #999 100%);
+            color: #666;
+        }
+        .coupon-card.used .coupon-right, .coupon-card.expired .coupon-right {
+            color: #666;
+        }
+
+        /* ------------------- 底部 Tab 栏 (与首页保持一致) ------------------- */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #eee;
+            z-index: 999;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: #999;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .tab-item.active {
+            color: #ff6700; /* 高亮橙色 */
+        }
+        .tab-item span:first-child {
+            font-size: 22px;
+        }
+    </style>
 </head>
 <body>
-  <!-- 公共头部 -->
-  <div class="header">
-    <div class="header-left">
-      <img src="images/shop-avatar.jpg" alt="店铺头像" class="shop-avatar">
-      <div class="shop-info">
-        <div class="shop-name">测试饭店1</div>
-        <div class="shop-greet">欢迎光临</div>
-      </div>
-    </div>
-    <div class="header-right">
-      <span>🔍</span>
-      <span>⭐</span>
-    </div>
-  </div>
-
-  <!-- 优惠券内容 -->
-  <div class="coupon-section">
-    <div class="section-title">店铺优惠券 (2)</div>
-
-    <!-- 第1张优惠券 -->
-    <div class="coupon-card">
-      <div class="coupon-left">10元</div>
-      <div class="coupon-middle">
-        <h3>满50减10</h3>
-        <p>全部商品无门槛可用</p>
-        <p style="font-size:14px; opacity:0.8;">测试饭店1</p>
-      </div>
-      <div class="coupon-right">领取</div>
+    <!-- 商家头部 -->
+    <div class="merchant-header">
+        <div class="merchant-avatar"></div>
+        <div class="merchant-info">
+            <h1>幸福金桥</h1>
+            <p>金桥社区便民服务站</p>
+        </div>
     </div>
 
-    <!-- 第2张优惠券 -->
-    <div class="coupon-card">
-      <div class="coupon-left">20元</div>
-      <div class="coupon-middle">
-        <h3>满100减20</h3>
-        <p>全部商品无门槛可用</p>
-        <p style="font-size:14px; opacity:0.8;">测试饭店1</p>
-      </div>
-      <div class="coupon-right">领取</div>
+    <!-- 优惠券主体 -->
+    <div class="coupon-container">
+        <div class="coupon-title">我的优惠券</div>
+
+        <!-- 优惠券1：满减券 -->
+        <div class="coupon-card">
+            <div class="coupon-left">
+                <div class="coupon-value">¥50</div>
+                <div class="coupon-desc">满200元可用</div>
+                <div class="coupon-time">有效期至 2026-12-31</div>
+            </div>
+            <div class="coupon-right">立即使用</div>
+        </div>
+
+        <!-- 优惠券2：折扣券 -->
+        <div class="coupon-card">
+            <div class="coupon-left">
+                <div class="coupon-value">8折</div>
+                <div class="coupon-desc">全品类通用</div>
+                <div class="coupon-time">有效期至 2026-11-30</div>
+            </div>
+            <div class="coupon-right">立即使用</div>
+        </div>
+
+        <!-- 优惠券3：已使用 -->
+        <div class="coupon-card used">
+            <div class="coupon-left">
+                <div class="coupon-value">¥30</div>
+                <div class="coupon-desc">满150元可用</div>
+                <div class="coupon-time">已使用</div>
+            </div>
+            <div class="coupon-right">已使用</div>
+        </div>
+
+        <!-- 优惠券4：已过期 -->
+        <div class="coupon-card expired">
+            <div class="coupon-left">
+                <div class="coupon-value">¥20</div>
+                <div class="coupon-desc">无门槛使用</div>
+                <div class="coupon-time">已过期</div>
+            </div>
+            <div class="coupon-right">已过期</div>
+        </div>
     </div>
-  </div>
 
-  <!-- 底部提示 -->
-  <div class="tip-text">
-    领取后请在有效期内使用，到店消费时向店员出示即可享受优惠
-  </div>
+    <!-- 底部 Tab 栏: 保持与首页一致 -->
+    <div class="tab-bar">
+        <a href="index.html" class="tab-item">
+            <span>🏠</span>
+            <span>首页</span>
+        </a>
+        <a href="ai.html" class="tab-item">
+            <span>✨</span>
+            <span>享碰AI</span>
+        </a>
+        <a href="coupon.html" class="tab-item active">
+            <span>🎫</span>
+            <span>优惠券</span>
+        </a>
+        <a href="mine.html" class="tab-item">
+            <span>👤</span>
+            <span>我的</span>
+        </a>
+    </div>
 
-  <!-- 底部Tab导航（当前页面高亮：优惠券） -->
-  <div class="footer-nav">
-    <a href="index.html" class="nav-item">
-      <span class="nav-icon">🏠</span>
-      <span class="nav-text">首页</span>
-    </a>
-    <a href="ai.html" class="nav-item">
-      <span class="nav-icon">✨</span>
-      <span class="nav-text">享碰AI</span>
-    </a>
-    <a href="coupon.html" class="nav-item active">
-      <span class="nav-icon">🎫</span>
-      <span class="nav-text">优惠券</span>
-    </a>
-    <a href="mine.html" class="nav-item">
-      <span class="nav-icon">👤</span>
-      <span class="nav-text">我的</span>
-    </a>
-  </div>
+ <style>
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0;
+            z-index: 999;
+            height: 70px;
+            box-sizing: border-box;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #999;
+            font-size: 12px;
+            flex: 1;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #ff6600;
+        }
+        .nav-icon {
+            font-size: 20px;
+        }
+    </style>
+
 </body>
 </html>

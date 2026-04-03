@@ -1,71 +1,487 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>金桥社区服务</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幸福金桥</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 70px; /* 给底部Tab栏留空间 */
+        }
+
+        /* ------------------- 顶部状态栏 ------------------- */
+        .status-bar {
+            background-color: #fff;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* ------------------- 商家头部 ------------------- */
+        .merchant-header {
+            background-color: #fff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .merchant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background-color: #ddd;
+            /* 替换方式：background-image: url("你的头像路径"); background-size: cover; */
+        }
+        .merchant-info h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .merchant-info p {
+            font-size: 14px;
+            color: #ff6700;
+        }
+        .header-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 20px;
+        }
+        .header-actions span {
+            font-size: 20px;
+            color: #999;
+        }
+
+        /* ------------------- Banner轮播 ------------------- */
+        .banner {
+            width: 100%;
+            height: 180px;
+            background-color: #07C160;
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 60px;
+            font-weight: bold;
+        }
+        .banner-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+        }
+        .dot.active {
+            background-color: #fff;
+        }
+
+        /* ------------------- 通用模块样式 ------------------- */
+        .module {
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .module-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* ------------------- AI商家助手模块（4个入口） ------------------- */
+        .ai-tools {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .tool-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #ff6700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 20px;
+        }
+        .tool-item span {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* ------------------- 更多服务模块（4个入口） ------------------- */
+        .more-services {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #f0f7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #07C160;
+            font-size: 20px;
+        }
+        .service-item span {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* ------------------- 推荐笔记模块 ------------------- */
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .note-header .view-more {
+            color: #ff6700;
+            font-size: 14px;
+        }
+        .note-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .note-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .note-image {
+            width: 100%;
+            height: 150px;
+            background-color: #ddd;
+            /* 替换方式：background-image: url("你的笔记图片路径"); background-size: cover; */
+        }
+        .note-content {
+            padding: 10px;
+        }
+        .note-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .note-stats {
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            gap: 15px;
+        }
+
+        /* ------------------- 为你推荐模块 ------------------- */
+        .recommend-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .recommend-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .recommend-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            background-color: #fff3e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff6700;
+            font-size: 24px;
+        }
+        .recommend-info h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .recommend-info p {
+            font-size: 14px;
+            color: #999;
+        }
+        .recommend-tag {
+            font-size: 12px;
+            color: #ff6700;
+            background-color: #fff3e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* ------------------- 底部Tab栏 ------------------- */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #eee;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: #999;
+            font-size: 12px;
+        }
+        .tab-item.active {
+            color: #ff6700;
+        }
+        .tab-item span:first-child {
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
+    <!-- 顶部状态栏 -->
+    <!-- <div class="status-bar">
+        <span>中国移动 10:24</span>
+        <div>
+            <span>🔋 70%</span>
+        </div>
+    </div> -->
 
-<!-- 1. 顶部栏 -->
-<div class="header">金桥社区服务</div>
+    <!-- 商家头部 -->
+    <div class="merchant-header">
+        <div class="merchant-avatar"></div>
+        <div class="merchant-info">
+            <h1>幸福金桥</h1>
+            <p>金桥社区便民服务站</p>
+        </div>
+        <div class="header-actions">
+            <span>🔍</span>
+            <span>⭐</span>
+        </div>
+    </div>
 
-<!-- 2. Banner区域（3张固定图） -->
-<div class="banner">
-  <div class="banner-list">
-    <img src="images/banner/banner1.jpg" alt="banner1">
-    <img src="images/banner/banner2.jpg" alt="banner2">
-    <img src="images/banner/banner3.jpg" alt="banner3">
-  </div>
-</div>
+    <!-- Banner轮播 -->
+    <div class="banner">
+        <div class="banner-content">公众号</div>
+        <div class="banner-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
 
-<!-- 3. 菜单区域（4个按钮+图标） -->
-<div class="menu">
-  <div class="menu-grid">
-    <a href="life.html" class="menu-item">
-      <img src="images/icons/life.png" alt="图标">
-      <span>生活服务</span>
-    </a>
-    <a href="notice.html" class="menu-item">
-      <img src="images/icons/notice.png" alt="图标">
-      <span>社区通知</span>
-    </a>
-    <a href="child.html" class="menu-item">
-      <img src="images/icons/child.png" alt="图标">
-      <span>托儿便民</span>
-    </a>
-    <a href="second.html" class="menu-item">
-      <img src="images/icons/second.png" alt="图标">
-      <span>闲置置换</span>
-    </a>
-  </div>
-</div>
+    <!-- AI商家助手模块（4个入口） -->
+    <div class="module">
+        <div class="module-title">AI商家助手 <span style="background-color: #ff6700; color: #fff; font-size: 12px; padding: 2px 6px; border-radius: 4px;">HOT</span></div>
+        <div class="ai-tools">
+            <div class="tool-item">
+                <div class="tool-icon">📝</div>
+                <span>大众点评</span>
+            </div>
+            <div class="tool-item">
+                <div class="tool-icon">📍</div>
+                <span>打卡</span>
+            </div>
+            <div class="tool-item">
+                <div class="tool-icon">📓</div>
+                <span>点评笔记</span>
+            </div>
+            <div class="tool-item">
+                <div class="tool-icon">🍜</div>
+                <span>美团</span>
+            </div>
+        </div>
+    </div>
 
-<!-- 4. 政务建设 -->
-<div class="module">
-  <div class="module-title">政务建设</div>
-  <a href="government.html">
-    <img src="images/government/gov.jpg" alt="政务建设" class="gov-img">
-  </a>
-</div>
+    <!-- 更多服务模块（4个入口） -->
+    <div class="module">
+        <div class="module-title">更多服务</div>
+        <div class="more-services">
+            <div class="service-item">
+                <div class="service-icon">🛍️</div>
+                <span>产品展示</span>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">🏠</div>
+                <span>商家介绍</span>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">📞</div>
+                <span>商家电话</span>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">💬</div>
+                <span>添加微信</span>
+            </div>
+        </div>
+    </div>
 
-<!-- 5. 服务推荐 -->
-<div class="module">
-  <div class="module-title">服务推荐</div>
-  <div class="service-grid">
-    <a href="service1.html" class="service-item">
-      <img src="images/service/service1.jpg" alt="服务1">
-    </a>
-    <a href="service2.html" class="service-item">
-      <img src="images/service/service2.jpg" alt="服务2">
-    </a>
-    <a href="service3.html" class="service-item">
-      <img src="images/service/service3.jpg" alt="服务3">
-    </a>
-  </div>
-</div>
+    <!-- 推荐笔记模块 -->
+    <div class="module">
+        <div class="note-header">
+            <div class="module-title">推荐笔记</div>
+            <div class="view-more">查看更多 ></div>
+        </div>
+        <div class="note-list">
+            <div class="note-card">
+                <div class="note-image"></div>
+                <div class="note-content">
+                    <div class="note-title">救命！这家饭店茄...</div>
+                    <div class="note-stats">
+                        <span>👁️ 279</span>
+                        <span>❤️ 0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="note-card">
+                <div class="note-image"></div>
+                <div class="note-content">
+                    <div class="note-title">饭店红烧肉封神！...</div>
+                    <div class="note-stats">
+                        <span>👁️ 246</span>
+                        <span>❤️ 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script src="js/script.js"></script>
+    <!-- 为你推荐模块 -->
+    <div class="module">
+        <div class="note-header">
+            <div class="module-title">为你推荐</div>
+            <div class="view-more">查看更多 ></div>
+        </div>
+        <div class="recommend-list">
+            <div class="recommend-card">
+                <div class="recommend-icon">🎁</div>
+                <div class="recommend-info">
+                    <h3>热门活动</h3>
+                    <p>参与精彩活动，发现更多惊喜</p>
+                    <span class="recommend-tag">进行中</span>
+                </div>
+            </div>
+            <div class="recommend-card">
+                <div class="recommend-icon">⭐</div>
+                <div class="recommend-info">
+                    <h3>会员专属</h3>
+                    <p>了解会员专属服务与权益</p>
+                    <span class="recommend-tag">敬请期待</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== 底部4Tab导航（固定） ===================== -->
+    <footer class="footer-nav">
+        <a href="index.html" class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span>首页</span>
+        </a>
+        <a href="ai.html" class="nav-item">
+            <span class="nav-icon">🤖</span>
+            <span>享碰AI</span>
+        </a>
+        <a href="coupon.html" class="nav-item">
+            <span class="nav-icon">🎫</span>
+            <span>优惠券</span>
+        </a>
+        <a href="mine.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span>我的</span>
+        </a>
+    </footer>
+
+    <style>
+        /* 底部Tab统一样式（所有页面通用） */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0;
+            z-index: 999;
+            height: 70px;
+            box-sizing: border-box;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #999;
+            font-size: 12px;
+            flex: 1;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #ff6600;
+        }
+        .nav-icon {
+            font-size: 20px;
+        }
+    </style>
 </body>
 </html>
