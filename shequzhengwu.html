@@ -16,7 +16,7 @@
             padding-bottom: 70px; /* 防止内容被底部栏遮挡 */
         }
 
-        /* 顶部导航栏 - 保留原结构 */
+        /* 顶部导航栏 */
         .top-nav {
             display: flex;
             align-items: center;
@@ -25,6 +25,7 @@
             background-color: #ffffff;
             border-bottom: 1px solid #eee;
         }
+        /* ✅ 统一修改：返回按钮样式（和报修页面完全一致） */
         .back-btn {
             font-size: 18px;
             color: #007bff;
@@ -46,230 +47,141 @@
             color: #333;
         }
 
-        /* 搜索功能区 - 模仿截图绿色顶部 */
-        .search-area {
-            background-color: #e6f9e6;
-            padding: 12px 16px;
-        }
-        .search-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        .location-tag {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            color: #333;
-            font-size: 0.95rem;
-        }
-        .search-input {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            background-color: white;
-            border-radius: 20px;
-            padding: 8px 16px;
-        }
-        .search-input input {
-            border: none;
-            outline: none;
-            flex: 1;
-            font-size: 1rem;
-        }
-        .search-btn {
-            background-color: #4caf50;
+        /* Banner区域 - 紫色渐变背景 */
+        .banner {
+            background: linear-gradient(180deg, #0830b4 0%, #6b83c7 100%);
+            padding: 40px 20px;
+            text-align: center;
             color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 1rem;
-            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        /* 探店标签 */
-        .tab-container {
+        /* 背景菱形纹理效果 */
+        .banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm10 10h10v10H10V10zM0 10h10v10H0V10zM10 0h10v10H10V0z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .banner-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .banner-subtitle {
+            background-color: #FFD166;
+            color: #333;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        /* Banner商品展示区 */
+        .banner-products {
             display: flex;
             justify-content: space-around;
-            margin-top: 10px;
-        }
-        .tab-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background-color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            width: 45%;
-        }
-        .tab-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-        .tab-text h4 {
-            font-size: 1.1rem;
-            margin-bottom: 2px;
-        }
-        .tab-text p {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        /* 分类标签栏 */
-        .category-bar {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px 16px;
-            background-color: white;
-            gap: 16px;
-            margin-bottom: 10px;
-        }
-        .category-item {
-            white-space: nowrap;
-            font-size: 1rem;
-            color: #666;
-            padding: 4px 0;
-        }
-        .category-item.active {
-            color: #333;
-            font-weight: 600;
-        }
-        .filter-tags {
-            display: flex;
-            gap: 10px;
-            padding: 0 16px 10px;
-            background-color: white;
-            overflow-x: auto;
-        }
-        .filter-tag {
-            white-space: nowrap;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-        }
-        .filter-tag.active {
-            background-color: #ff4444;
-            color: white;
-        }
-
-        /* 免单提示条 */
-        .free-tip {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: white;
-            padding: 10px 16px;
-            margin-bottom: 10px;
-        }
-        .free-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .free-icon {
-            background-color: #ff4444;
-            color: white;
-            padding: 4px 6px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-        }
-        .countdown {
-            color: #ff4444;
-            font-weight: 600;
-        }
-
-        /* 商品列表 - 模仿截图布局 */
-        .product-list {
-            padding: 0 16px;
+            position: relative;
+            z-index: 1;
         }
         .product-item {
             display: flex;
-            background-color: white;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-direction: column;
+            align-items: center;
         }
-        .product-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 8px;
-            background-color: #e0e0e0;
-            flex-shrink: 0;
+        .product-platform {
+            width: 140px;
+            height: 60px;
+            background-color: #2046af;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
+            margin-top: -30px;
         }
-        .product-info {
+        .product-img {
+            width: 80px;
+            height: auto;
+            background-color: rgba(255, 255, 255, 0);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            padding: 5px;
+        }
+
+        /* 活动列表区域 */
+        .activity-list {
+            padding: 16px;
+        }
+        .activity-item {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .item-img {
+            width: 120px;
+            height: 80px;
+            background-color: #112596;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .item-img::before {
+            content: "";
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .item-info {
             flex: 1;
-            padding-left: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            padding: 0 16px;
         }
-        .product-title {
-            font-size: 1.1rem;
-            font-weight: 600;
+        .item-info h3 {
+            font-size: 1.2rem;
             color: #333;
-            margin-bottom: 4px;
-        }
-        .product-tags {
-            display: flex;
-            gap: 10px;
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 6px;
-        }
-        .product-detail {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 8px;
-            font-size: 0.9rem;
+        }
+        .item-info p {
             color: #666;
+            font-size: 0.95rem;
         }
-        .price-area {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .condition {
-            font-size: 0.85rem;
-            color: #666;
-        }
-        .price-btn {
-            background: linear-gradient(90deg, #ff4444 60%, #ffdd00 40%);
+        .btn-view {
+            background-color: #2852dd;
             color: white;
             border: none;
             border-radius: 20px;
-            padding: 10px 16px;
+            padding: 10px 24px;
             font-size: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            cursor: pointer;
         }
-        .price-tag {
-            background-color: white;
-            color: #ff4444;
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-left: 4px;
-        }
+        
 
-        /* 底部导航栏 */
+        /* 底部互动栏 */
         .footer-bar {
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            padding: 10px 0;
+            padding: 12px 16px;
             background-color: white;
             border-top: 1px solid #eee;
             position: fixed;
@@ -277,184 +189,102 @@
             left: 0;
             right: 0;
         }
-        .footer-item {
+        .input-box {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 16px;
+            font-size: 1rem;
+        }
+        .actions {
+            display: flex;
+            gap: 24px;
+        }
+        .action-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 0.85rem;
             color: #666;
+            font-size: 0.9rem;
         }
-        .footer-item.active {
-            color: #4caf50;
-        }
-        .footer-icon {
-            font-size: 1.3rem;
+        .icon {
+            width: 20px;
+            height: 20px;
+            background-color: #666;
+            border-radius: 2px;
             margin-bottom: 4px;
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航栏 - 保留原结构 -->
+    <!-- 顶部导航栏 -->
     <div class="top-nav">
+        <!-- ✅ 统一修改：返回按钮（功能+样式和报修页面一致） -->
         <div class="back-btn" onclick="javascript:history.back(-1);">返回</div>
-        <div class="nav-title">“天天团购”活动专辑</div>
+        <div class="nav-title">社区政务</div>
         <button class="nav-btn">⋯</button>
     </div>
 
-    <!-- 搜索功能区 - 模仿截图顶部 -->
-    <div class="search-area">
-        <div class="search-bar">
-            <div class="location-tag">📍 浦东…</div>
-            <div class="search-input">
-                <input type="text" placeholder="找好店">
-                <button class="search-btn">搜索</button>
-            </div>
-        </div>
-        <div class="tab-container">
-            <div class="tab-item">
-                <div class="tab-icon" style="background-color: #4caf50; color: white;">省钱</div>
-                <div class="tab-text">
-                    <h4>省钱探店</h4>
-                    <p>笔记抵扣省钱</p>
-                </div>
-            </div>
-            <div class="tab-item">
-                <div class="tab-icon" style="background-color: #ff9800; color: white;">赚钱</div>
-                <div class="tab-text">
-                    <h4>赚钱探店</h4>
-                    <p>高价接通告赚钱</p>
-                </div>
-            </div>
+    <!-- Banner区域 -->
+    <div class="banner">
+        <h1 class="banner-title">社区监督电话</h1>
+        <button class="banner-subtitle">热线：4006669999</button>
+        <div class="banner-products">
         </div>
     </div>
 
-    <!-- 分类标签栏 -->
-    <div class="category-bar">
-        <div class="category-item active">推荐</div>
-        <div class="category-item">看笔记</div>
-        <div class="category-item">小吃快餐</div>
-        <div class="category-item">饮品类</div>
-        <div class="category-item">甜品蛋糕</div>
-        <div class="category-item">地方菜</div>
-    </div>
-    <div class="filter-tags">
-        <div class="filter-tag">筛选</div>
-        <div class="filter-tag">出游甄选</div>
-        <div class="filter-tag active">新人免单</div>
-        <div class="filter-tag">近期上新</div>
-        <div class="filter-tag">只看可抢</div>
-    </div>
-
-    <!-- 免单提示条 -->
-    <div class="free-tip">
-        <div class="free-left">
-            <span class="free-icon">免单</span>
-            <span>您有1张免单卡 待使用</span>
-        </div>
-        <div class="countdown">06天 23:59:42 后到期 ></div>
-    </div>
-
-    <!-- 商品列表 - 模仿截图内容 -->
-    <div class="product-list">
-        <!-- 商品1 -->
-        <div class="product-item">
-            <div class="product-img">☕ 咖啡</div>
-            <div class="product-info">
-                <div>
-                    <div class="product-title">Juaner Coffee卷二煎饼咖啡 特惠咖啡单人餐</div>
-                    <div class="product-tags">
-                        <span>✅ 随时退·过期自动退</span>
-                        <span>热度97</span>
-                    </div>
-                    <div class="product-detail">
-                        <span>本套餐美团在售¥19.8</span>
-                        <span>距离425.4m</span>
-                    </div>
-                    <div class="condition">大众点评等级≥Lv1 | 部分日期不可约</div>
-                </div>
-                <div class="price-area">
-                    <button class="price-btn">
-                        <span>¥0</span>
-                        <span class="price-tag">¥19.8</span>
-                        <span>⚡ 立抢</span>
-                    </button>
-                </div>
+    <!-- 活动列表 -->
+    <div class="activity-list">
+        <div class="activity-item">
+            <div class="item-img">
+                <div class="product-img">党员活动</div>
             </div>
-        </div>
-        <!-- 商品2 -->
-        <div class="product-item">
-            <div class="product-img">🥛 米乳</div>
-            <div class="product-info">
-                <div>
-                    <div class="product-title">谷人说·中国谷饮 五谷丰登套餐</div>
-                    <div class="product-tags">
-                        <span>✅ 随时退·过期自动退</span>
-                        <span>热度98</span>
-                    </div>
-                    <div class="product-detail">
-                        <span>本套餐美团在售¥35.9</span>
-                        <span>距离1.21km</span>
-                    </div>
-                    <div class="condition">需打卡收藏 | 部分日期不可约</div>
-                </div>
-                <div class="price-area">
-                    <button class="price-btn">
-                        <span>¥0</span>
-                        <span class="price-tag">¥35.9</span>
-                        <span>⚡ 立抢</span>
-                    </button>
-                </div>
+            <div class="item-info">
+                <h3>先进旗手</h3>
+                <p>当前：王子豪</p>
             </div>
+            <button class="btn-view">详情</button>
         </div>
-        <!-- 商品3 -->
-        <div class="product-item">
-            <div class="product-img">🍜 大排面</div>
-            <div class="product-info">
-                <div>
-                    <div class="product-title">泽福记卤味铺·面馆 单人餐(大排面+荷包蛋)</div>
-                    <div class="product-tags">
-                        <span>✅ 随时退·过期自动退</span>
-                        <span>164人觉得超值</span>
-                    </div>
-                    <div class="product-detail">
-                        <span>本套餐美团在售¥18</span>
-                        <span>距离1.67km</span>
-                    </div>
-                    <div class="condition">大众点评等级≥Lv1 | 全周可约</div>
-                </div>
-                <div class="price-area">
-                    <button class="price-btn">
-                        <span>¥0</span>
-                        <span class="price-tag">¥18</span>
-                        <span>⚡ 立抢</span>
-                    </button>
-                </div>
+        <div class="activity-item">
+            <div class="item-img">
+                <div class="product-img">事务公开</div>
             </div>
+            <div class="item-info">
+                <h3>公开信息</h3>
+                <p>监督人：孙小虎</p>
+            </div>
+            <button class="btn-view">查询</button>
         </div>
-        <!-- 商品4 -->
-        <div class="product-item">
-            <div class="product-img">🍲 川菜</div>
-            <div class="product-info">
-                <div>
-                    <div class="product-title">福德味·本帮菜·川湘菜 江浙菜双人餐</div>
-                    <div class="product-tags">
-                        <span>✅ 随时退·过期自动退</span>
-                        <span>鲈鱼鲜嫩 元宝虾味鲜</span>
-                    </div>
-                    <div class="product-detail">
-                        <span>本套餐美团在售¥166</span>
-                        <span>距离2.71km</span>
-                    </div>
-                    <div class="condition">大众点评等级≥Lv5 | 部分日期不可约</div>
-                </div>
-                <div class="price-area">
-                    <button class="price-btn">
-                        <span>¥0</span>
-                        <span class="price-tag">¥166</span>
-                        <span>⚡ 立抢</span>
-                    </button>
-                </div>
+        <div class="activity-item">
+            <div class="item-img">
+                <div class="product-img">上岗竞聘</div>
             </div>
+            <div class="item-info">
+                <h3>招聘事项</h3>
+                <p>负责人：赵昊仁</p>
+            </div>
+            <button class="btn-view">查看</button>
+        </div>
+                <div class="activity-item">
+            <div class="item-img">
+                <div class="product-img">意见建议</div>
+            </div>
+            <div class="item-info">
+                <h3>意见箱</h3>
+                <p>监督人：李坐堂</p>
+            </div>
+            <button class="btn-view">提交</button>
+        </div>
+                <div class="activity-item">
+            <div class="item-img">
+                <div class="product-img">反腐举报</div>
+            </div>
+            <div class="item-info">
+                <h3>人人有责</h3>
+                <p>负责人：周责贵</p>
+            </div>
+            <button class="btn-view">反馈</button>
         </div>
     </div>
 

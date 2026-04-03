@@ -6,18 +6,128 @@
   <title>生活服务</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* 全局重置 */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Microsoft Yahei", sans-serif;
+    /* 适配原有页面的报名表样式 */
+    .module-title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      padding: 15px 0;
+      background-color: #e0e6c8; /* 呼应图片的草地色 */
+      margin-bottom: 0;
     }
-    body {
-      background-color: #f5f5f5;
+    .form-container {
+      background-color: white;
+      padding: 20px;
+    }
+    .welcome-text {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    .form-item {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 17px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .form-label .required {
+      color: #f44336; /* 必填星号红色 */
+      margin-right: 4px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #81c784; /* 绿色焦点高亮 */
+    }
+    /* 单选按钮组样式 */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .radio-option input {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+    }
+    /* 下拉框样式 */
+    .form-select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      background-color: white;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+    }
+    /* 地址组（下拉+文本框） */
+    .address-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    /* 家长信息组 */
+    .parent-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    /* 提交按钮 */
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #43a047;
+    }
+    /* 顶部卡通Banner */
+    .form-banner {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(to bottom, #bbdefb, #c8e6c9);
+      position: relative;
+      overflow: hidden;
+    }
+    .form-banner-illustration {
+      width: 100%;
+      height: 100%;
+      /* 示例插画，可替换为你自己的图片 */
+      background-image: url('https://img.icons8.com/color/96/000000/kid-on-bike.png');
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 150px;
     }
 
-    /* 顶部标题栏（保留原样式+返回按钮） */
+    /* ========== 新增：顶部标题栏返回功能样式 ========== */
     .header {
       display: flex;
       align-items: center;
@@ -30,234 +140,46 @@
       position: relative;
       border-bottom: 1px solid #eee;
     }
+    /* 返回按钮样式 */
     .back-btn {
       position: absolute;
       left: 20px;
       font-size: 18px;
-      color: #007bff; /* 改为蓝色主题 */
+      color: #4caf50;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 5px;
     }
     .back-btn:hover {
-      color: #0056b3;
-    }
-
-    /* 模块容器 */
-    .module {
-      background-color: white;
-      min-height: auto;
-    }
-
-    /* 顶部蓝色Banner */
-    .form-banner {
-      width: 100%;
-      height: 150px;
-      background-color: #007bff;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><pattern id="pattern" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.2)"/><path d="M50 10 L60 30 L40 30 Z" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23pattern)"/></svg>');
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .banner-title {
-      font-size: 60px;
-      font-weight: bold;
-      color: white;
-      text-shadow: 2px 2px 0 #ffc107; /* 黄色描边，还原原图效果 */
-    }
-
-    /* 表单标题与提示语 */
-    .form-title {
-      font-size: 30px;
-      font-weight: bold;
-      color: #333;
-      text-align: center;
-      padding: 30px 20px 10px;
-    }
-    .form-tip {
-      font-size: 18px;
-      color: #333;
-      padding: 0 20px 25px;
-      line-height: 1.6;
-    }
-
-    /* 表单通用样式 */
-    .form-container {
-      padding: 0 20px 30px;
-    }
-    .form-item {
-      margin-bottom: 25px;
-    }
-    .form-label {
-      display: block;
-      font-size: 18px;
-      color: #333;
-      margin-bottom: 10px;
-    }
-    .form-label .required {
-      color: #dc3545;
-      margin-right: 5px;
-    }
-    .form-input {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-    .form-input:focus {
-      outline: none;
-      border-color: #007bff;
-    }
-
-    /* 单选按钮组 */
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: 1px; /* 还原原图的分割线效果 */
-    }
-    .radio-option {
-      display: flex;
-      align-items: center;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-bottom: none;
-    }
-    .radio-option:last-child {
-      border-bottom: 1px solid #ddd;
-    }
-    .radio-option input {
-      margin-right: 15px;
-      width: 20px;
-      height: 20px;
-    }
-
-    /* 文本域（报修内容） */
-    .form-textarea {
-      width: 100%;
-      height: 150px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-      resize: none;
-    }
-    .form-textarea:focus {
-      outline: none;
-      border-color: #007bff;
-    }
-
-    /* 上传图片框 */
-    .upload-box {
-      width: 100%;
-      padding: 25px;
-      border: 1px dashed #ccc;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #999;
-      font-size: 16px;
-    }
-    .upload-box .icon {
-      font-size: 24px;
-    }
-
-    /* 提交按钮 */
-    .submit-btn {
-      width: 100%;
-      padding: 18px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .submit-btn:hover {
-      background-color: #0056b3;
+      color: #43a047;
     }
   </style>
 </head>
 <body>
-<!-- 保留原顶部标题+返回按钮 -->
+<!-- ========== 修改：顶部标题增加返回按钮 ========== -->
 <div class="header">
   <div class="back-btn" onclick="javascript:history.back(-1);">返回</div>
   金桥社区服务
 </div>
 
-<div class="module">
-  <!-- 顶部蓝色Banner -->
+<div class="module" style="min-height: auto;">
+  <!-- 顶部卡通Banner -->
   <div class="form-banner">
-    <div class="banner-title">信息记录表</div>
+    <div class="form-banner-illustration"></div>
   </div>
-
-  <!-- 表单标题与提示语 -->
-  <div class="form-title">社区报修登记表</div>
-  <p class="form-tip">请认真填写以下内容，谢谢。</p>
-
+  <!-- 模块标题 -->
+  <div class="module-title">享碰AI智慧生活进社区啦</div>
   <!-- 表单主体 -->
   <div class="form-container">
-    <!-- 1. 姓名 -->
-    <div class="form-item">
-      <label class="form-label"><span class="required">*</span> 1. 姓名</label>
-      <input type="text" class="form-input" placeholder="请输入姓名">
-    </div>
-<!-- 
-    2. 性别
-    <div class="form-item">
-      <label class="form-label"><span class="required">*</span> 2. 性别</label>
-      <div class="radio-group">
-        <div class="radio-option">
-          <input type="radio" name="gender" id="male" value="男">
-          <label for="male">男</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" name="gender" id="female" value="女">
-          <label for="female">女</label>
-        </div>
-      </div>
-    </div> -->
+    <!-- 欢迎语 -->
+    <p class="welcome-text">
+享碰AI活动进社区开启✨</p>
+👉参与对象：辖区所有住户</p>
+👉活动项目：体验碰一碰AI，免费领取精美礼品、肉蛋奶等</p>
+   社区联动，商家优惠，传递社区温情，欢迎各位积极参加！</p>
 
-    <!-- 3. 学号 -->
-    <div class="form-item">
-      <label class="form-label"><span class="required">*</span> 2. 所在楼栋</label>
-      <input type="text" class="form-input" placeholder="请输入">
-    </div>
-
-    <!-- 4. 寝室号 -->
-    <div class="form-item">
-      <label class="form-label"><span class="required">*</span> 3. 具体位置</label>
-      <input type="text" class="form-input" placeholder="请输入">
-    </div>
-
-    <!-- 5. 手机号 -->
-    <div class="form-item">
-      <label class="form-label"><span class="required">*</span> 4. 手机号</label>
-      <input type="tel" class="form-input" placeholder="请输入手机号">
-    </div>
-
-    <!-- 6. 报修内容 -->
-    <div class="form-item">
-      <label class="form-label"><span class="required">*</span> 5. 报修内容</label>
-      <textarea class="form-textarea" placeholder="请输入"></textarea>
-    </div>
-
-    <!-- 7. 上传图片 -->
-    <div class="form-item">
-      <label class="form-label"><span class="required">*</span> 6. 请上传图片</label>
-      <div class="upload-box">
-        <span class="icon">+</span>
-        <span>请输入</span>
-        <!-- 实际使用时，可替换为文件上传input -->
-        <input type="file" style="display: none;" id="upload">
-      </div>
-    </div>
-
-    <!-- 提交按钮 -->
-    <button class="submit-btn">提交</button>
+   
   </div>
 </div>
 </body>
