@@ -1,0 +1,328 @@
+/* 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+}
+body {
+  background-color: #f5f5f5;
+  padding-bottom: 70px; /* 给底部Tab留出空间，避免被挡住 */
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ------------------- 公共头部样式 ------------------- */
+.header {
+  background: white;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.shop-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.shop-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+.shop-greet {
+  font-size: 14px;
+  color: #ff6600;
+}
+.header-right {
+  display: flex;
+  gap: 24px;
+  font-size: 20px;
+  color: #999;
+}
+
+/* ------------------- 底部Tab导航样式 ------------------- */
+.footer-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  z-index: 999;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #999;
+  font-size: 12px;
+}
+/* 当前页面高亮状态 */
+.nav-item.active {
+  color: #ff6600;
+}
+.nav-icon {
+  font-size: 20px;
+}
+
+/* ------------------- 1. 优惠券页面样式 ------------------- */
+.coupon-section {
+  padding: 16px;
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-title::before {
+  content: "🏪";
+}
+.coupon-card {
+  background: #ff6600;
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.coupon-left {
+  font-size: 40px;
+  font-weight: bold;
+}
+.coupon-middle {
+  flex: 1;
+  text-align: center;
+}
+.coupon-middle h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.coupon-middle p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+.coupon-right {
+  font-size: 18px;
+  font-weight: 500;
+}
+.tip-text {
+  background: #fff9e6;
+  color: #ff8c00;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tip-text::before {
+  content: "✨";
+}
+
+/* ------------------- 2. 我的页面样式 ------------------- */
+.mine-header {
+  background: linear-gradient(135deg, #ff6600, #ff9933);
+  margin: 16px;
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mine-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+.mine-login {
+  display: flex;
+  gap: 12px;
+}
+.btn-login {
+  background: white;
+  color: #ff6600;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-weight: 600;
+}
+.btn-register {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 24px;
+}
+.member-benefit {
+  margin: 0 16px 16px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-around;
+}
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.benefit-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.benefit-item:nth-child(1) .benefit-icon { background: #fff2e6; color: #ff6600; }
+.benefit-item:nth-child(2) .benefit-icon { background: #e6f0ff; color: #4096ff; }
+.benefit-item:nth-child(3) .benefit-icon { background: #e6ffed; color: #36b37e; }
+.benefit-item:nth-child(4) .benefit-icon { background: #f5e6ff; color: #9254de; }
+.list-card {
+  background: white;
+  border-radius: 12px;
+  margin: 0 16px 16px;
+}
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #f5f5f5;
+}
+.list-item:last-child { border-bottom: none; }
+.list-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.list-icon {
+  font-size: 20px;
+}
+.list-text {
+  font-size: 16px;
+}
+.list-arrow {
+  color: #999;
+}
+.ad-banner {
+  margin: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ad-banner img {
+  width: 100%;
+  display: block;
+}
+.footer-text {
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  margin-top: 20px;
+}
+.footer-text span {
+  color: #ff6600;
+  font-weight: 600;
+}
+
+/* ------------------- 3. 享碰AI页面样式 ------------------- */
+.ai-chat {
+  padding: 16px;
+}
+.ai-message {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  max-width: 80%;
+}
+.ai-message-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ai-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #ff6600;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quick-questions {
+  margin-top: 40px;
+}
+.quick-title {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 16px;
+}
+.quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.quick-btn {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #333;
+}
+.input-area {
+  position: fixed;
+  bottom: 70px; /* 比Tab高，避免被挡住 */
+  left: 0;
+  width: 100%;
+  padding: 12px 16px;
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.input-box {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #eee;
+  border-radius: 24px;
+  outline: none;
+}
+.send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6600, #ff9933);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

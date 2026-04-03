@@ -1,115 +1,182 @@
-/* 全局重置 */
+/* 苹果风｜保留原图｜增强优化版 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Microsoft Yahei", sans-serif;
+  font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+  transition: all 0.3s ease;
 }
 body {
-  background: #f5f7fa;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.7;
+  padding-bottom: 80px;
 }
 a {
   text-decoration: none;
   color: inherit;
+  display: block;
 }
 
-/* 1. 顶部栏 */
+/* 1.顶部栏 */
 .header {
-  background: #2d8cf0;
-  color: white;
+  background: linear-gradient(135deg, #4096ff, #69b1ff);
+  color: #fff;
   text-align: center;
-  padding: 18px 0;
-  font-size: 24px;
-  font-weight: bold;
+  padding: 20px 0;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 12px rgba(64,150,255,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 98;
 }
 
-/* 2. Banner区域 */
-.banner {
-  width: 100%;
-  margin: 10px 0;
+/* 大模块：弱边框+圆角+留白｜核心样式 */
+.section-wrap {
+  margin: 16px 12px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
 }
+
+/* 2.Banner 保留3张原图 */
 .banner-list {
   display: flex;
   gap: 10px;
-  overflow: hidden;
+  width: 100%;
 }
 .banner-list img {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
+  loading: lazy; /* 图片懒加载，提速 */
+}
+.banner-list img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* 3. 菜单区域 */
-.menu {
-  background: white;
-  padding: 20px;
-  margin: 10px 0;
-  border-radius: 8px;
-}
+/* 3.菜单区域 保留图标原图 */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 18px;
 }
 .menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 24px 10px;
+  border-radius: 14px;
+  background: #f7f9fc;
   text-align: center;
+}
+.menu-item:hover {
+  background: #e8f3ff;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(64,150,255,0.12);
 }
 .menu-item img {
   width: 40px;
   height: 40px;
   margin-bottom: 8px;
+  object-fit: contain;
+  loading: lazy;
 }
 .menu-item span {
   font-size: 16px;
   font-weight: 500;
+  color: #222;
 }
 
-/* 4. 政务建设 */
-.module {
-  background: white;
-  padding: 20px;
-  margin: 10px 0;
-  border-radius: 8px;
-}
+/* 4.政务建设 保留原图 */
 .module-title {
   font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 15px;
-  border-left: 4px solid #2d8cf0;
-  padding-left: 10px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  border-left: 4px solid #4096ff;
+  padding-left: 12px;
 }
 .gov-img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
+  loading: lazy;
+}
+.gov-img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* 5. 服务推荐 */
+/* 5.服务推荐 保留3张原图 */
 .service-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 12px;
 }
 .service-item img {
   width: 100%;
   height: 120px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
+  loading: lazy;
+}
+.service-item img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* 手机适配 */
-@media (max-width: 768px) {
-  .service-grid {
-    grid-template-columns: 1fr;
-  }
+/* 底部动态渐变栏（防遮挡优化） */
+.footer-dynamic {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(-45deg, #4096ff, #69b1ff, #95c8ff, #4096ff);
+  background-size: 400% 400%;
+  animation: waveBg 8s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 1px;
+  z-index: 99;
+}
+@keyframes waveBg {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* 返回顶部按钮 */
+.back-top {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  width: 44px;
+  height: 44px;
+  background: #4096ff;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 44px;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(64,150,255,0.3);
+  z-index: 100;
+}
+.back-top:hover {
+  transform: scale(1.1);
+}
+
+/* 手机适配强化 */
+@media (max-width:768px){
+  .service-grid{grid-template-columns:1fr;}
+  .banner-list img{height:140px;}
+  .header{font-size:22px;}
 }
